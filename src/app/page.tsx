@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 /* ─────────────────────── Navigation ─────────────────────── */
@@ -970,8 +970,36 @@ function Footer() {
 }
 
 /* ─────────────────────── Page Root ────────────────────────── */
+const VALID_SECTIONS: Section[] = ["tech", "rnd", "updates", "company"];
+
+function getHashSection(): Section {
+  if (typeof window === "undefined") return "tech";
+  const hash = window.location.hash.replace("#", "");
+  return VALID_SECTIONS.includes(hash as Section) ? (hash as Section) : "tech";
+}
+
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState<Section>("tech");
+
+  // On mount, read hash from URL
+  useEffect(() => {
+    setActiveSection(getHashSection());
+  }, []);
+
+  // When the user clicks a nav link, push hash to history
+  const handleNav = useCallback((section: Section) => {
+    setActiveSection(section);
+    window.history.pushState(null, "", `#${section}`);
+  }, []);
+
+  // Listen for back/forward navigation
+  useEffect(() => {
+    const onPopState = () => {
+      setActiveSection(getHashSection());
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   const renderSection = () => {
     switch (activeSection) {
@@ -988,7 +1016,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Navbar active={activeSection} onNav={setActiveSection} />
+      <Navbar active={activeSection} onNav={handleNav} />
       <main>{renderSection()}</main>
       <Footer />
     </>
