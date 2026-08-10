@@ -9,29 +9,28 @@ export const metadata: Metadata = {
 
 const posts = [
   {
-    slug: "fpga-vs-microcontroller",
+    slug: "arm-cortex-migration",
     type: "blog" as const,
-    title:
-      "Why We Chose an FPGA Over a Microcontroller for Test Pattern Generation",
-    date: "September 15, 2025",
+    title: "Migrating to a 32-Bit ARM Cortex Core for IC Diagnostics",
+    date: "August 2025",
     excerpt:
-      "Microcontrollers can bit-bang protocols, but they can't generate deterministic, cycle-accurate test patterns at 50MHz. Here's how we evaluated Lattice ECP5 vs. Xilinx Artix-7 and why the open-source toolchain tipped the scales.",
+      "Moving beyond basic microcontrollers to build a highly robust, software-defined power routing matrix. Here is a deep dive into how we use 74HC595 shift registers and discrete MOSFETs to dynamically safely assign VCC, GND, and signal paths to any pin on our ZIF socket.",
   },
   {
-    slug: "first-ic-test",
+    slug: "standalone-ic-testing",
     type: "tutorial" as const,
-    title: "Getting Started: Your First IC Test with NDICE and Python",
-    date: "October 2, 2025",
+    title: "Standalone IC Testing: Verifying Your First 74-Series Gate",
+    date: "January 2026",
     excerpt:
-      "A step-by-step walkthrough of testing a 74HC00 quad NAND gate — from wiring the DIP socket to writing your first test script. Covers installation, pin mapping, and reading test results.",
+      "A quick walkthrough on testing standard logic chips without a host PC. Learn how to drop a 7432 or 7474 into the ZIF socket, navigate the tactile UI's \"Gates\" menu, and execute a cycle-accurate hardware verification sequence using the integrated LCD.",
   },
   {
-    slug: "open-hardware-summit-2025",
+    slug: "national-drone-war-2026",
     type: "event" as const,
-    title: "NDICE at Open Hardware Summit 2025",
-    date: "November 8, 2025",
+    title: "Live NDICE Prototype Demo at National Drone War 1.0",
+    date: "May 2026",
     excerpt:
-      "We're demoing the 64-channel prototype at OHS in Portland. Come see live IC testing on the bench, grab a PCB coaster, and talk shop about open-source test infrastructure. Booth #42.",
+      "We took the NDICE Digital IC Tester to the lab bench for a live exhibition at the JIIT 128 campus. Students and hardware engineers interacted directly with our latest Proto_V0.5 hardware, giving us crucial real-world feedback on our tactile UI stack and component categories.",
   },
 ];
 

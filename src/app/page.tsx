@@ -562,8 +562,9 @@ function TechSection() {
             <span className="accent">We make it easier.</span>
           </h1>
           <p className="hero-sub">
-            Open-source IC test infrastructure for the next generation of chip
-            designers. Validate your silicon without the six-figure price tag.
+            The ultimate standalone Digital IC Tester. Instantly verify the
+            health of standard 74-series logic gates, flip-flops, and shift
+            registers without the tedious breadboard-and-LED setups.
           </p>
           <div className="hero-cta-row">
             <Link href="/waitlist" className="btn-primary" id="cta-waitlist">
@@ -586,33 +587,31 @@ function TechSection() {
             <div className="callout-index">01 — Why</div>
             <h3>Why We&apos;re Building This</h3>
             <p>
-              IC testing equipment has been locked behind enterprise paywalls for
-              decades. A single ATE system can cost $500K+, shutting out
-              university labs, indie chip designers, and hardware startups in
-              emerging markets. We believe access to test infrastructure
-              shouldn&apos;t be a barrier to silicon innovation.
+              Hardware prototyping shouldn&apos;t stall because of a faulty
+              logic chip. We believe students, educators, and indie hardware
+              developers deserve fast, reliable, and accessible diagnostic
+              tools to keep their focus on design, not debugging.
             </p>
           </div>
           <div className="callout" id="callout-problem">
             <div className="callout-index">02 — Problem</div>
             <h3>The Problem</h3>
             <p>
-              Existing IC testers are monolithic, proprietary, and
-              absurdly expensive. They require dedicated facilities, specialized
-              training, and long procurement cycles. Small teams either skip
-              proper testing entirely — shipping blind — or burn months waiting
-              for shared lab time at a foundry.
+              Traditional logic verification relies on tedious breadboarding,
+              manual jumper wires, and LEDs as a process that is slow,
+              error-prone, and frustrating. Meanwhile, commercial ATE
+              (Automated Test Equipment) systems are massively expensive and
+              completely out of reach for university labs and everyday makers.
             </p>
           </div>
           <div className="callout" id="callout-solution">
             <div className="callout-index">03 — Solution</div>
             <h3>Our Solution</h3>
             <p>
-              NDICE is a modular, open-source IC tester that fits on your
-              bench. USB-C powered, scriptable via Python, and designed to test
-              everything from simple logic ICs to mixed-signal devices. We&apos;re
-              making functional test accessible at 1/100th the cost of
-              legacy systems.
+              The NDICE Digital IC Tester is a modular, diagnostic-ready tool.
+              Powered by a 32-bit ARM Cortex-M4 core, it features a universal
+              ZIF socket and an intuitive LCD menu to instantly test over 50
+              standard digital ICs with zero manual wiring.
             </p>
           </div>
         </div>
@@ -636,48 +635,53 @@ function TechSection() {
             <div className="spec-label">Logic Families</div>
             <div className="spec-value">TTL / CMOS</div>
             <div className="spec-desc">
-              Full support for 5V TTL and 3.3V / 1.8V CMOS logic families.
-              Configurable I/O thresholds per pin.
+              Full diagnostic support for standard 5V 74-series digital ICs,
+              including logic gates, flip-flops, and buffers.
             </div>
           </div>
           <div className="spec-cell" id="spec-interfaces">
             <div className="spec-label">Interfaces</div>
-            <div className="spec-value">SPI / I²C / JTAG</div>
+            <div className="spec-value">ARM Cortex-M4 Core</div>
             <div className="spec-desc">
-              Native protocol engines for SPI, I²C, UART, and JTAG. No
-              bit-banging — hardware-accelerated at full speed.
+              Powered by a high-performance STM32 microcontroller with a
+              custom power delivery network utilizing hardware shift
+              registers for dynamic pin assignment.
             </div>
           </div>
           <div className="spec-cell" id="spec-speed">
             <div className="spec-label">Test Speed</div>
-            <div className="spec-value">50 MHz</div>
+            <div className="spec-value">Standalone Operation</div>
             <div className="spec-desc">
-              Pattern generation and capture up to 50 MHz clock rate.
-              Sufficient for most digital and mixed-signal validation.
+              Fully untethered testing. Features an integrated 16x2 I²C LCD
+              and a 4-button tactile navigation menu for rapid categorization
+              and testing without a PC.
             </div>
           </div>
           <div className="spec-cell" id="spec-pins">
-            <div className="spec-label">Pin Support</div>
-            <div className="spec-value">64 Channels</div>
+            <div className="spec-label">Socket</div>
+            <div className="spec-value">Universal ZIF Socket</div>
             <div className="spec-desc">
-              64 bidirectional test channels, expandable to 256 via daisy-chain
-              modules. Per-pin programmable driver/receiver.
+              Drop-in support for standard DIP-14 packages. Features
+              safe-lock socket with automated VCC and GND power routing to
+              prevent accidental chip damage.
             </div>
           </div>
           <div className="spec-cell" id="spec-power">
             <div className="spec-label">Power</div>
             <div className="spec-value">USB-C / 5V</div>
             <div className="spec-desc">
-              Bus-powered via USB-C for portable operation. External 5V supply
-              option for high-current DUT testing up to 2A.
+              Convenient 5V operation via standard USB-C, ensuring seamless
+              compatibility with modern workbench setups, PCs, and portable
+              powerbanks.
             </div>
           </div>
           <div className="spec-cell" id="spec-open">
-            <div className="spec-label">Open Source</div>
-            <div className="spec-value">Full Stack</div>
+            <div className="spec-label">Firmware</div>
+            <div className="spec-value">Extensible Firmware</div>
             <div className="spec-desc">
-              Hardware (KiCad), firmware (C/Rust), and host software (Python)
-              — all open-source under Apache 2.0. Fork it, extend it, own it.
+              Designed for continuous expansion. Our firmware architecture
+              allows for the rapid addition of new IC test vectors and fully
+              automated testing suites.
             </div>
           </div>
         </div>
@@ -716,31 +720,60 @@ function TechSection() {
 function RnDSection() {
   const entries = [
     {
-      date: "March 2025",
-      title: "First Board Spin — Nothing Worked (Almost)",
+      date: "September 2023",
+      title: "The Catalyst",
       body: [
-        "We got the first NDICE prototype PCBs back from JLCPCB and populated them by hand. Three days of soldering 0402s with a heat gun and tweezers. The FPGA booted, the USB enumerated, and then… nothing. The level shifters were oscillating at 200MHz because we'd routed the decoupling caps on the wrong side of the via.",
-        "Lesson: don't trust autorouter on mixed-voltage domains. We ripped up the power plane, hand-routed every bypass cap, and reflowed. Board v1.1 came alive at 2am on a Tuesday. The first test pattern — a simple walking-ones on a 74HC595 — passed clean. We may have screamed.",
+        "It started with a simple, yet brutal hardware competition: design a functional Digital IC Tester. Out of the entire field, we were one of only two teams that successfully engineered and delivered a working prototype. That was the moment we knew we had something real.",
       ],
-      tags: ["hardware", "pcb-rev-1.1", "power-integrity"],
+      tags: [],
     },
     {
-      date: "May 2025",
-      title: "Python SDK & the Impedance Mismatch Problem",
+      date: "September 2024",
+      title: "Validation",
       body: [
-        "Building the Python host library seemed straightforward until we hit the real-time constraint wall. USB bulk transfers have unpredictable latency, and our test patterns need cycle-accurate timing. We tried three different approaches: raw libusb, pyusb with async, and finally a custom C extension that pre-buffers patterns into the FPGA's block RAM.",
-        "The C extension won by 40x. We're now getting consistent 50MHz pattern rates with zero dropped vectors. The API is clean — three lines of Python to define, load, and execute a test. We're writing the docs now and it feels like the kind of tool we wish we'd had two years ago.",
+        "With a working prototype in hand, we entered the entrepreneurship hackathon at RideHack 2024. The goal shifted from just building hardware to building a viable business model around accessible lab equipment.",
       ],
-      tags: ["firmware", "python-sdk", "usb-latency"],
+      tags: [],
+    },
+    {
+      date: "November – December 2024",
+      title: "The Investment",
+      body: [
+        "We took our tester to the final round of RideHack, pitching live in front of a panel of real investors. By December, the verdict was in: we had successfully secured investment to take our prototype to the next level.",
+      ],
+      tags: [],
+    },
+    {
+      date: "March 8, 2025",
+      title: "It's Official",
+      body: [
+        "Novatri Digital Integrated Circuits and Electronics Private Limited (NDICE) is formally incorporated. We transitioned from a student project into a fully-fledged hardware startup.",
+      ],
+      tags: [],
     },
     {
       date: "August 2025",
-      title: "64 Channels and the Ground Bounce from Hell",
+      title: "The Architecture Shift",
       body: [
-        "Scaling from 16 to 64 channels revealed every PCB sin we'd committed. Ground bounce on simultaneous switching outputs was corrupting adjacent capture channels. We spent two weeks with an oscilloscope and a lot of coffee isolating the coupling paths.",
-        "The fix was unglamorous but effective: split ground planes per 16-channel bank, added series termination resistors on every driver output, and staggered the switching edges by 2ns per bank. Crosstalk dropped from 400mV to under 20mV. The 64-channel board now passes our full regression suite — 2,847 test vectors across 12 different IC families — with zero failures.",
+        "As we pushed the limits of our early prototypes, we hit the ceiling of what 8-bit microcontrollers could do. We completely scrapped our original Arduino UNO-based architecture and migrated to a 32-bit STM32 ARM Cortex core, unlocking the speed and I/O necessary for industrial-grade logic testing.",
       ],
-      tags: ["signal-integrity", "64-channel", "ground-bounce"],
+      tags: [],
+    },
+    {
+      date: "January – April 2026",
+      title: "The Custom Hardware Sprint",
+      body: [
+        "We transitioned from development boards to our first custom PCB spins. This phase was defined by raw engineering: fighting automated fabrication boundaries, perfecting our power delivery network to eliminate internal voltage drops, and locking in the mechanical stack (brass standoffs and modular headers) to create a true, durable desktop tool.",
+      ],
+      tags: [],
+    },
+    {
+      date: "May 2026",
+      title: "Live and In the Wild",
+      body: [
+        "We took the functional MVP out of the lab and exhibited it at the National Drone War 1.0 event. Putting the tester in front of a live audience and watching people interact with the ZIF socket and tactile UI gave us critical real-world feedback, validating that our vision for accessible logic testing is exactly what the hardware community needs.",
+      ],
+      tags: [],
     },
   ];
 
@@ -760,6 +793,17 @@ function RnDSection() {
       </section>
 
       <div className="section">
+        <p className="code-comment">// Our Story</p>
+        <p
+          style={{
+            fontFamily: "var(--font-heading), Syne, sans-serif",
+            fontSize: "20px",
+            marginBottom: "32px",
+            color: "#e0e0e0",
+          }}
+        >
+          From a lab bench challenge to a funded hardware startup.
+        </p>
         <div className="timeline">
           {entries.map((entry, i) => (
             <div className="timeline-entry" key={i} id={`rnd-entry-${i}`}>
@@ -789,28 +833,28 @@ function RnDSection() {
 function UpdatesSection() {
   const updates = [
     {
-      slug: "fpga-vs-microcontroller",
+      slug: "arm-cortex-migration",
       type: "blog" as const,
-      title: "Why We Chose an FPGA Over a Microcontroller for Test Pattern Generation",
-      date: "September 15, 2025",
+      title: "Migrating to a 32-Bit ARM Cortex Core for IC Diagnostics",
+      date: "August 2025",
       excerpt:
-        "Microcontrollers can bit-bang protocols, but they can't generate deterministic, cycle-accurate test patterns at 50MHz. Here's how we evaluated Lattice ECP5 vs. Xilinx Artix-7 and why the open-source toolchain tipped the scales.",
+        "Moving beyond basic microcontrollers to build a highly robust, software-defined power routing matrix. Here is a deep dive into how we use 74HC595 shift registers and discrete MOSFETs to dynamically safely assign VCC, GND, and signal paths to any pin on our ZIF socket.",
     },
     {
-      slug: "first-ic-test",
+      slug: "standalone-ic-testing",
       type: "tutorial" as const,
-      title: "Getting Started: Your First IC Test with NDICE and Python",
-      date: "October 2, 2025",
+      title: "Standalone IC Testing: Verifying Your First 74-Series Gate",
+      date: "January 2026",
       excerpt:
-        "A step-by-step walkthrough of testing a 74HC00 quad NAND gate — from wiring the DIP socket to writing your first test script. Covers installation, pin mapping, and reading test results.",
+        "A quick walkthrough on testing standard logic chips without a host PC. Learn how to drop a 7432 or 7474 into the ZIF socket, navigate the tactile UI's \"Gates\" menu, and execute a cycle-accurate hardware verification sequence using the integrated LCD.",
     },
     {
-      slug: "open-hardware-summit-2025",
+      slug: "national-drone-war-2026",
       type: "event" as const,
-      title: "NDICE at Open Hardware Summit 2025",
-      date: "November 8, 2025",
+      title: "Live NDICE Prototype Demo at National Drone War 1.0",
+      date: "May 2026",
       excerpt:
-        "We're demoing the 64-channel prototype at OHS in Portland. Come see live IC testing on the bench, grab a PCB coaster, and talk shop about open-source test infrastructure. Booth #42.",
+        "We took the NDICE Digital IC Tester to the lab bench for a live exhibition at the JIIT 128 campus. Students and hardware engineers interacted directly with our latest Proto_V0.5 hardware, giving us crucial real-world feedback on our tactile UI stack and component categories.",
     },
   ];
 
