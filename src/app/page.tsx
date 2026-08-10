@@ -901,9 +901,9 @@ function UpdatesSection() {
 /* ─────────────────────── Company Section ──────────────────── */
 function CompanySection() {
   const founders = [
-    { initials: "AP", name: "Apoorv Patel", role: "CEO / Hardware Lead" },
-    { initials: "SK", name: "Sara Kim", role: "CTO / Firmware Lead" },
-    { initials: "RD", name: "Ravi Deshmukh", role: "COO / Operations" },
+    { initials: "DB", name: "Dhruv Bal Dixit", role: "Co-Founder" },
+    { initials: "PS", name: "Prerna Sharma", role: "Co-Founder" },
+    { initials: "AM", name: "Apoorv Mittal", role: "Software Engineer" },
   ];
 
   const partners = [
