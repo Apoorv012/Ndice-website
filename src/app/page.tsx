@@ -57,9 +57,6 @@ function Navbar({
               {l.label}
             </button>
           ))}
-          <Link href="/waitlist" className="nav-cta" id="nav-cta-build">
-            Build with us →
-          </Link>
         </div>
       </div>
     </nav>
@@ -567,11 +564,6 @@ function TechSection() {
             health of standard 74-series logic gates, flip-flops, and shift
             registers without the tedious breadboard-and-LED setups.
           </p>
-          <div className="hero-cta-row">
-            <Link href="/waitlist" className="btn-primary" id="cta-waitlist">
-              Join the Waitlist →
-            </Link>
-          </div>
         </div>
 
         <div className="section">

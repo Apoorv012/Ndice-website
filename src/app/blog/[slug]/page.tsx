@@ -230,9 +230,6 @@ export default async function BlogPostPage({
             <Link href="/blog" className="btn-secondary">
               ← All Posts
             </Link>
-            <Link href="/waitlist" className="btn-primary">
-              Join the Waitlist →
-            </Link>
           </div>
         </article>
       </main>
