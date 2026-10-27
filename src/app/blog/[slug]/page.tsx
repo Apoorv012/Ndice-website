@@ -1,57 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-
-/* ─── Post Data ───────────────────────────────────────────── */
-interface Post {
-  slug: string;
-  type: "blog" | "tutorial" | "event";
-  title: string;
-  date: string;
-  readTime: string;
-  excerpt: string;
-  content: string[];
-}
-
-const posts: Post[] = [
-  {
-    slug: "arm-cortex-migration",
-    type: "blog",
-    title: "Migrating to a 32-Bit ARM Cortex Core for IC Diagnostics",
-    date: "August 2025",
-    readTime: "6 min read",
-    excerpt:
-      "Moving beyond basic microcontrollers to build a highly robust, software-defined power routing matrix.",
-    content: [
-      "Moving beyond basic microcontrollers to build a highly robust, software-defined power routing matrix. Here is a deep dive into how we use 74HC595 shift registers and discrete MOSFETs to dynamically safely assign VCC, GND, and signal paths to any pin on our ZIF socket.",
-      "As we pushed the limits of our early prototypes, we hit the ceiling of what 8-bit microcontrollers could do. We completely scrapped our original Arduino UNO-based architecture and migrated to a 32-bit STM32 ARM Cortex core, unlocking the speed and I/O necessary for industrial-grade logic testing.",
-    ],
-  },
-  {
-    slug: "standalone-ic-testing",
-    type: "tutorial",
-    title: "Standalone IC Testing: Verifying Your First 74-Series Gate",
-    date: "January 2026",
-    readTime: "5 min read",
-    excerpt:
-      "A quick walkthrough on testing standard logic chips without a host PC.",
-    content: [
-      "A quick walkthrough on testing standard logic chips without a host PC. Learn how to drop a 7432 or 7474 into the ZIF socket, navigate the tactile UI's \"Gates\" menu, and execute a cycle-accurate hardware verification sequence using the integrated LCD.",
-    ],
-  },
-  {
-    slug: "national-drone-war-2026",
-    type: "event",
-    title: "Live NDICE Prototype Demo at National Drone War 1.0",
-    date: "May 2026",
-    readTime: "3 min read",
-    excerpt:
-      "We took the NDICE Digital IC Tester to the lab bench for a live exhibition at the JIIT 128 campus.",
-    content: [
-      "We took the NDICE Digital IC Tester to the lab bench for a live exhibition at the JIIT 128 campus. Students and hardware engineers interacted directly with our latest Proto_V0.5 hardware, giving us crucial real-world feedback on our tactile UI stack and component categories.",
-    ],
-  },
-];
+import { updates, updateBadgeLabels, getUpdate } from "@/data/updates";
 
 /* ─── Metadata ────────────────────────────────────────────── */
 export async function generateMetadata({
@@ -60,16 +10,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = getUpdate(slug);
   if (!post) return { title: "Post Not Found — NDICE" };
   return {
     title: `${post.title} — NDICE Blog`,
-    description: post.excerpt,
+    description: post.summary,
   };
 }
 
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return updates.map((p) => ({ slug: p.slug }));
 }
 
 /* ─── Page ────────────────────────────────────────────────── */
@@ -79,21 +29,11 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = getUpdate(slug);
   if (!post) notFound();
 
-  const badgeClass =
-    post.type === "blog"
-      ? "update-badge blog"
-      : post.type === "tutorial"
-        ? "update-badge tutorial"
-        : "update-badge event";
-  const badgeLabel =
-    post.type === "blog"
-      ? "Technical Blog"
-      : post.type === "tutorial"
-        ? "Tutorial"
-        : "Event Spotlight";
+  const badgeClass = `update-badge ${post.type}`;
+  const badgeLabel = updateBadgeLabels[post.type];
 
   return (
     <>
@@ -238,6 +178,24 @@ export default async function BlogPostPage({
                       );
                     })}
                   </div>
+                );
+              }
+              if (paragraph.startsWith("## ")) {
+                return (
+                  <h2
+                    key={i}
+                    style={{
+                      fontFamily: "var(--font-heading), Syne, sans-serif",
+                      fontSize: "22px",
+                      lineHeight: 1.3,
+                      fontWeight: 700,
+                      letterSpacing: "-0.01em",
+                      marginTop: "48px",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {paragraph.slice(3)}
+                  </h2>
                 );
               }
               return (

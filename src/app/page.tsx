@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { updates, updateBadgeLabels } from "@/data/updates";
 
 /* ─────────────────────── Navigation ─────────────────────── */
 type Section = "tech" | "rnd" | "updates" | "company";
@@ -831,33 +832,6 @@ function RnDSection() {
 
 /* ─────────────────────── Updates Section ──────────────────── */
 function UpdatesSection() {
-  const updates = [
-    {
-      slug: "arm-cortex-migration",
-      type: "blog" as const,
-      title: "Migrating to a 32-Bit ARM Cortex Core for IC Diagnostics",
-      date: "August 2025",
-      excerpt:
-        "Moving beyond basic microcontrollers to build a highly robust, software-defined power routing matrix. Here is a deep dive into how we use 74HC595 shift registers and discrete MOSFETs to dynamically safely assign VCC, GND, and signal paths to any pin on our ZIF socket.",
-    },
-    {
-      slug: "standalone-ic-testing",
-      type: "tutorial" as const,
-      title: "Standalone IC Testing: Verifying Your First 74-Series Gate",
-      date: "January 2026",
-      excerpt:
-        "A quick walkthrough on testing standard logic chips without a host PC. Learn how to drop a 7432 or 7474 into the ZIF socket, navigate the tactile UI's \"Gates\" menu, and execute a cycle-accurate hardware verification sequence using the integrated LCD.",
-    },
-    {
-      slug: "national-drone-war-2026",
-      type: "event" as const,
-      title: "Live NDICE Prototype Demo at National Drone War 1.0",
-      date: "May 2026",
-      excerpt:
-        "We took the NDICE Digital IC Tester to the lab bench for a live exhibition at the JIIT 128 campus. Students and hardware engineers interacted directly with our latest Proto_V0.5 hardware, giving us crucial real-world feedback on our tactile UI stack and component categories.",
-    },
-  ];
-
   return (
     <div className="fade-in" id="section-updates">
       <section className="section updates-hero">
@@ -871,7 +845,7 @@ function UpdatesSection() {
 
       <div className="section">
         <div className="updates-grid">
-          {updates.map((u, i) => (
+          {updates.slice(0, 3).map((u, i) => (
             <Link
               href={`/blog/${u.slug}`}
               className="update-card"
@@ -880,11 +854,7 @@ function UpdatesSection() {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <span className={`update-badge ${u.type}`}>
-                {u.type === "blog"
-                  ? "Technical Blog"
-                  : u.type === "tutorial"
-                    ? "Tutorial"
-                    : "Event Spotlight"}
+                {updateBadgeLabels[u.type]}
               </span>
               <h3>{u.title}</h3>
               <div className="update-date">{u.date}</div>
@@ -893,6 +863,13 @@ function UpdatesSection() {
             </Link>
           ))}
         </div>
+        {updates.length > 3 && (
+          <div style={{ marginTop: "32px" }}>
+            <Link href="/blog" className="btn-secondary">
+              View all posts →
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -927,7 +904,7 @@ function CompanySection() {
         <p>
           NDICE was founded with a simple belief: the tools to validate
           integrated circuits should be as accessible as the tools to design
-          them. We&apos;re a small, technical team building open infrastructure
+          them. We&apos;re a small, technical team building accessible infrastructure
           for the hardware community.
         </p>
       </section>
