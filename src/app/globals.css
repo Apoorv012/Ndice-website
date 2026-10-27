@@ -255,25 +255,6 @@ h1, h2, h3, h4 {
   font-family: var(--font-mono), monospace;
 }
 
-.btn-primary {
-  font-family: var(--font-mono), monospace;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: var(--color-accent);
-  color: var(--color-bg);
-  border: 1px solid var(--color-accent);
-  padding: 14px 32px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-weight: 600;
-}
-
-.btn-primary:hover {
-  background: transparent;
-  color: var(--color-accent);
-}
-
 .btn-secondary {
   font-family: var(--font-mono), monospace;
   font-size: 13px;
@@ -737,33 +718,6 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Partners */
-.partners-section {
-  margin: 80px auto 0;
-}
-
-.partners-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.partner-pill {
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-  padding: 10px 20px;
-  letter-spacing: 0.05em;
-  transition: all 0.2s;
-}
-
-.partner-pill:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
 /* CTA Block */
 .company-cta {
   margin: 120px auto 0;
@@ -887,30 +841,12 @@ h1, h2, h3, h4 {
   border-bottom-color: var(--color-accent);
 }
 
-/* ── Career Role Cards ────────────────────────────── */
-.career-role-card:hover {
-  border-color: var(--color-accent) !important;
-  z-index: 1;
-}
-
-/* ── Forms ─────────────────────────────────────────── */
-input::placeholder,
-textarea::placeholder {
-  color: var(--color-text-muted);
-}
-
-select option {
-  background: var(--color-bg-card);
-  color: var(--color-text-primary);
-}
-
 /* ── Link overrides (for cards used as links) ─────── */
 a.update-card {
   text-decoration: none;
   color: inherit;
 }
 
-a.btn-primary,
 a.btn-secondary {
   text-decoration: none;
   display: inline-block;

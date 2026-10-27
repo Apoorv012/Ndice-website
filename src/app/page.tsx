@@ -740,7 +740,7 @@ function RnDSection() {
       date: "March 8, 2025",
       title: "It's Official",
       body: [
-        "Novatri Digital Integrated Circuits and Electronics Private Limited (NDICE) is formally incorporated. We transitioned from a student project into a fully-fledged hardware startup.",
+        "Novatri Digital IIntegrated Circuits and Electronics Private Limited (NDICE) is formally incorporated. We transitioned from a student project into a fully-fledged hardware startup.",
       ],
       tags: [],
     },
@@ -871,17 +871,8 @@ function UpdatesSection() {
 function CompanySection() {
   const founders = [
     { initials: "DB", name: "Dhruv Bal Dixit", role: "Co-Founder" },
-    { initials: "PS", name: "Prerna Sharma", role: "Co-Founder" },
+    { initials: "PS", name: "Preyerna Srivastava", role: "Co-Founder" },
     { initials: "AM", name: "Apoorv Mittal", role: "Software Engineer" },
-  ];
-
-  const partners = [
-    "IIT Bombay EE Lab",
-    "FOSSEE Project",
-    "JLCPCB",
-    "Lattice Semi",
-    "Open Source Hardware Association",
-    "Tindie",
   ];
 
   return (
@@ -915,32 +906,9 @@ function CompanySection() {
         </div>
       </div>
 
-      {/* Partners */}
-      <div className="section partners-section">
-        <p className="section-label">Partners & Collaborators</p>
-        <div className="partners-row">
-          {partners.map((p) => (
-            <div className="partner-pill" key={p}>
-              {p}
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* CTA Blocks */}
       <div className="section">
         <div className="company-cta">
-          <div className="company-cta-block" id="cta-careers">
-            <h3>
-              Careers — <span style={{ color: "#c8f03c" }}>We&apos;re Hiring</span>
-            </h3>
-            <p>
-              We&apos;re looking for embedded engineers, FPGA developers, and
-              developer-relations humans who care about open hardware. Remote-first,
-              async-heavy, deeply technical.
-            </p>
-            <Link href="/careers" className="btn-primary" style={{ textDecoration: "none", display: "inline-block" }}>View Open Roles →</Link>
-          </div>
           <div className="company-cta-block" id="cta-contact">
             <h3>Get in Touch</h3>
             <p>
